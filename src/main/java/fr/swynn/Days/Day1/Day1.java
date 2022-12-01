@@ -19,7 +19,7 @@ public class Day1 implements IDay {
         return inputs;
     }
 
-    private List<Integer> convertIntoInetger() throws NumberFormatException {
+    private List<Integer> getSumCalories() throws NumberFormatException {
         List<Integer> calories = new ArrayList<Integer>();
         int sum = 0;
         for (String input : getInputs()) {
@@ -37,8 +37,9 @@ public class Day1 implements IDay {
     @Override
     public void run() {
         try {
-            List<Integer> calories = convertIntoInetger();
+            List<Integer> calories = getSumCalories();
             calories.sort(Comparator.reverseOrder());
+            
             System.out.println("Day 1 - Part 1: " + calories.get(0));
             System.out.println("Day 1 - Part 2: " + (calories.get(0) + calories.get(1) + calories.get(2)));
         } catch (NumberFormatException e) {
