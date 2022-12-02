@@ -8,12 +8,6 @@ import fr.swynn.utils.FileHandler;
 
 public class Day2 implements IDay {
 
-    /**
-     * X -> Lose
-     * Y -> Draw
-     * Z -> Win
-     */
-
     private final int WIN = 6;
     private final int DRAW = 3;
     private final int LOSE = 0;
@@ -22,6 +16,14 @@ public class Day2 implements IDay {
     private final int PAPER = 2;
     private final int SCISSORS = 3;
 
+    /**
+     * This method is used to get the result of a game.
+     * 
+     * @param {char} p1 - The first player.
+     * @param {char} p2 - The second player.
+     * 
+     * @returns {int} - The score of the second player.
+     */
     private char fight(char p1, char p2) {
         switch (p2) {
             case 'X':
@@ -56,6 +58,17 @@ public class Day2 implements IDay {
         }
     }
 
+    /**
+     * This method is used to get the tricked score of a player.
+     * X -> LOSE
+     * y -> DRAW
+     * Z -> WIN
+     * 
+     * @param {char} p1 - The player play.
+     * @param {char} state - The state of the play.
+     * 
+     * @returns {int} - The score of the player.
+     */
     public int trickedFight(char p1, char state) {
         switch (state) {
             case 'X': {
@@ -96,6 +109,7 @@ public class Day2 implements IDay {
     private int[] getMatches() {
         try {
             ArrayList<String> fights = new FileHandler("Days/Day2/data.txt").getFileContent();
+
             int[] scores = new int[2];
             for (String fight : fights) {
                 String[] players = fight.split(" ");

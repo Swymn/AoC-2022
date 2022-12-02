@@ -7,24 +7,40 @@ import java.util.Scanner;
 
 public class FileHandler {
     
-    private final String fileName;
+    private final File file;
 
     public FileHandler(String fileName) {
-        this.fileName = fileName;
+        this.file = new File("src/main/java/fr/swynn/" + fileName);
     }
 
-    public String getFileName() {
-        return fileName;
+    /**
+     * This method is used to get the file.
+     * 
+     * @return {File} - The file.
+     */
+    public File getFileName() {
+        return file;
     }
 
+    /**
+     * This method is used to get the path of the file.
+     * 
+     * @return {String} - The path of the file.
+     */
     public String getFilePath() {
-        return getClass().getResource(fileName).getPath();
+        return file.toPath().toString();
     }
 
+    /**
+     * This method is used to get the content of a file.
+     * 
+     * @returns {ArrayList<String>} - The content of the file.
+     * 
+     * @throws FileNotFoundException - If the file is not found.
+     */
     public ArrayList<String> getFileContent() throws FileNotFoundException {
         ArrayList<String> inputs = new ArrayList<String>();
-        File file = new File("src/main/java/fr/swynn/" + fileName);
-        Scanner scanner = new Scanner(file);
+        Scanner scanner = new Scanner(this.file);
         while (scanner.hasNextLine()) {
             inputs.add(scanner.nextLine());
         }

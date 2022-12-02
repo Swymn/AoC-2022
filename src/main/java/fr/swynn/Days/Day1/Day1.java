@@ -10,7 +10,12 @@ import fr.swynn.utils.FileHandler;
 
 public class Day1 implements IDay {
 
-    private List<Integer> getSumCalories() throws NumberFormatException {
+    /**
+     * This function is used to get the sum of the elf calories.
+     * 
+     * @returns {List<Integer>} - The sum of the elf calories.
+     */
+    private List<Integer> getSumCalories() {
         try {
             ArrayList<String> inputs = new FileHandler("Days/Day1/data.txt").getFileContent();
             List<Integer> calories = new ArrayList<Integer>();
