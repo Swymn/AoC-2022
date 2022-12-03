@@ -19,12 +19,26 @@ public class Day3 implements IDay {
         }
     }
 
+    /**
+     * This method will cut the string in two parts.
+     * 
+     * @param {String} str - The string to cut
+     * 
+     * @return {String[]} The two parts of the string
+     */
     private String[] cutString(String str) {
         final int MID = str.length() / 2;
         String[] parts = { str.substring(0, MID), str.substring(MID) };
         return parts;
     }
 
+    /**
+     * This method will find the letter common to both strings.
+     * 
+     * @param {String} str - The string to find the common letter
+     * 
+     * @return {char} - The common char
+     */
     private char findLetterInBothString(String str) {
         String[] parts = cutString(str);
         char result = ' ';
@@ -38,6 +52,13 @@ public class Day3 implements IDay {
         return result == ' ' ? null : result;
     }
 
+    /**
+     * This method will find common letter in grouups of string.
+     * 
+     * @param {String[]} str - The array of string to find the common letter
+     * 
+     * @return {char} - The common char
+     */
     private char findLetterInGroups(String[] str) {
 
         char result = ' ';
@@ -57,6 +78,13 @@ public class Day3 implements IDay {
         return result;
     } 
 
+    /**
+     * This method will return the score of the letter.
+     * 
+     * @param {char} letter - The letter to find the score
+     * 
+     * @return {int} - The score of the letter
+     */
     private int valueOfLetter(char letter) {
         if (Character.isUpperCase(letter))
             // Because the value of A is 65, and we need to add 26 to get the valid value.
@@ -64,6 +92,11 @@ public class Day3 implements IDay {
         return letter - 96;
     }
 
+    /**
+     * This method will return the score of the string.
+     * 
+     * @return {int} - The score of the string
+     */
     private int sumOfLetters() {
         int sum = 0;
         for (int i = 0; i < inputDatas.size(); i++) {
@@ -72,6 +105,11 @@ public class Day3 implements IDay {
         return sum;
     }
 
+    /**
+     * This method will return the score of the groups of string.
+     * 
+     * @return {int} - The score of the string
+     */
     private int sumOfGroups() {
         int sum = 0;
         for (int i = 0; i < inputDatas.size(); i += 3) {
