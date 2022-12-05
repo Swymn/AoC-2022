@@ -2,6 +2,7 @@ package fr.swynn.Days.Day5;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import fr.swynn.Days.IDay;
@@ -36,6 +37,11 @@ public class Day5 implements IDay {
         }
     }
 
+    /**
+     * This method is used to get the column count and the row count.
+     * 
+     * @return {int[]} The first value is the column count, the second value is the row count.
+     */
     private int[] getColumn() {
         final int[] xy = new int[2];
         for (int i = 0; i < this.inputDatas.size(); i++) {
@@ -50,13 +56,17 @@ public class Day5 implements IDay {
         return null;
     }
 
+    /**
+     * This method is used to generate the table from the data.txt file.
+     * 
+     * @return {void}
+     */
     private void generateTable() {
         int valueIndex = 1;
         for (int i = 0; i < this.columonCount; i++) {
             Stack<String> stack = new Stack<String>();
             for (int j = this.rowCount-1; j >= 0; j--) {
-                String item = this.inputDatas.get(j);
-                String value = item.toCharArray()[valueIndex] + "";
+                String value = this.inputDatas.get(j).toCharArray()[valueIndex] + "";
                 if (value.trim().isEmpty()) continue;
                 stack.add(value);
             }
@@ -65,6 +75,11 @@ public class Day5 implements IDay {
         }
     }
 
+    /**
+     * This method is used to get the top item of the table.
+     * 
+     * @return {String} The top item of the table.
+     */
     private String getTopItem() {
         String res = "";
         for (int i = 0; i < this.arrayDatas.size(); i++) {
@@ -74,6 +89,11 @@ public class Day5 implements IDay {
         return res;
     }
 
+    /**
+     * This method is used to show the stacks (debug).
+     * 
+     * @return {void}
+     */
     private void showstacks() {
         for (int i = 0; i < this.arrayDatas.size(); i++) {
             Stack<String> stack = this.arrayDatas.get(i);
@@ -84,37 +104,46 @@ public class Day5 implements IDay {
         }
     }
 
-    private void partOne() {
+    /**
+     * This method is used to run the game.
+     * 
+     * @param {boolean} keepOrder - If true, the order of the item will be kept.
+     * 
+     * @return {void}
+     */
+    private void game(boolean keepOrder) {
         for (int i = this.rowCount+2; i < this.inputDatas.size(); i++) {
             Intsruction instruction = new Intsruction(this.inputDatas.get(i));
 
             Stack<String> stackFrom = this.arrayDatas.get(instruction.getColumnFrom());
             Stack<String> stackTo = this.arrayDatas.get(instruction.getColumnTo());
 
+            if (!keepOrder) {
+                for (int j = 0; j < instruction.getValue(); j++) {
+                    String value = stackFrom.pop();
+                    if (value == null) continue;
+                    stackTo.add(value);
+                }
+                continue;
+            } 
+
+            List<String> list = new ArrayList<String>();
+
             for (int j = 0; j < instruction.getValue(); j++) {
                 String value = stackFrom.pop();
                 if (value == null) continue;
-                stackTo.add(value);
+                list.add(value);
             }
 
-            /* System.out.println("----------- Part " + i + " -----------");
-            showstacks();
-            System.out.println("----------- End Part " + i + " -----------"); */
+            for (int j = list.size()-1; j >= 0; j--) {
+                stackTo.add(list.get(j));
+            }
         }
     }
 
     @Override
     public void run() {
-        /* System.out.println("----------- Start -----------");
-        showstacks();
-        System.out.println("----------- Start -----------"); */
-
-        partOne();
-
-        /* System.out.println("----------- End -----------");
-        showstacks();
-        System.out.println("----------- End -----------"); */
-
+        game(true);
         System.out.println("Top item: " + getTopItem());
     }
 }
