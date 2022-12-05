@@ -1,10 +1,10 @@
 package fr.swynn;
 
-import fr.swynn.Days.Day4.Day4;
+import fr.swynn.Days.Day5.Day5;
 
 public class App {
     public static void main( String[] args ) {
         System.out.println( "AoC - 2022" );
-        new Day4().run();
+        new Day5().run();
     }
 }
